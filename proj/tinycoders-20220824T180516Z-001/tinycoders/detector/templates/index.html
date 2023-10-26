@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DetectProject</title>
+    <link rel="stylesheet" href="{% static '/styles/style.css' %}">
+<body >
+    <h1>MADHYA PRADESH POLICE ANPR SYSTEM</h1>
+    <div>
+	    <ul id="menu-select">
+	        <li><a href="#" onclick="displayimage()">Image</a></li>
+	        <li><a href="#" onclick="displayvideo()">Video</a></li>
+	        <li><a href="#" onclick="displaywebcam()">Webcam</a></li>
+			
+	    </ul>
+	</div>
+    <div id="form-container">
+	    <div id="image-upload" style="display:none">
+	      <form class="formheading" method="post" enctype="multipart/form-data" action="/image/">
+	          <h3>Upload the image to detect...</h3>
+	          {% csrf_token %}
+	          <div class="box">
+	            <input type="file" name="imagepath" required>
+	            <button class="submitbtn" type="submit">Detect</button>
+	          </div>
+	        </form>
+	    </div>
+	    <div id="video-upload" style="display:none">
+	        <form class="formheading" method="post" enctype="multipart/form-data" action="/video/">
+	              <h3>Upload the video to detect...</h3>
+	              {% csrf_token %}
+	              <div class="box">
+	                <input type="file" name="videopath" required>
+	                <button class="submitbtn" type="submit" onclick="videoprocess()">Detect</button>
+	              </div>
+	        </form>
+	    </div>
+	    <div id="webcam-upload" style="display:none">
+	        <form class="formheading" method="post" action="/webcam/">
+	          {% csrf_token %}
+	          <div class="box">
+	              <h5>Webcam</h5>
+	            <button class="submitbtn" type="submit">StartWebcam</button>
+	          </div>
+	        </form>
+	    </div>
+	    <div id="video-txt" style="display:none">
+	        <h4>Processed video will be available in few minutes....</h4>
+	    </div>
+		{% if data %}
+	<div id="video-out" >
+			<h4>Output is available <a href="{% url 'output' %}">here</a></h4>
+	    </div>
+
+	{% endif %}
+		<div id="FExplorer" style="display:block">
+			<form class="formheading" method="post" enctype="multipart/form-data" action="/path/">
+				<h5 id="path"></h5>
+				
+			</form>
+		  </div>
+	</div>
+
+
+     <script type="text/javascript">
+        function displayimage() {
+          document.getElementById("image-upload").style.display = "block";
+          document.getElementById("video-upload").style.display = "None";
+          document.getElementById("webcam-upload").style.display = "None";
+          document.getElementById("video-txt").style.display = "None";
+        }
+
+        function displayvideo() {
+          document.getElementById("video-upload").style.display = "block";
+          document.getElementById("image-upload").style.display = "None";
+          document.getElementById("webcam-upload").style.display = "None";
+          document.getElementById("video-txt").style.display = "None";
+        }
+
+		function openV() {
+			console.log('test');
+			document.getElementById("path").innerHTML = "File Saved at path: C:\\files ";
+
+        }
+
+        function displaywebcam() {
+          document.getElementById("video-upload").style.display = "None";
+          document.getElementById("image-upload").style.display = "None";
+          document.getElementById("webcam-upload").style.display = "block";
+          document.getElementById("video-txt").style.display = "None";
+        }
+        function videoprocess(){
+            document.getElementById("video-txt").style.display = "block";
+        }
+
+      </script>
+</body>
+</html>

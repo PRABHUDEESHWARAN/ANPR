@@ -1,0 +1,38 @@
+
+ body {
+    background-color: #aa8cdf;
+    background-image: url('../images/background.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+body, h1 {
+    text-align: center;
+    font-family: italic;
+    color: antiquewhite;
+}
+
+#menu-select{
+	position: absolute;
+  	margin-top: 200px;
+  	margin-left:100px;
+  	color: antiquewhite;
+  	text-decoration: none;
+  	list-style-type: none;
+
+}
+
+#menu-select li{
+	float: left;
+	padding: 15px;
+	}
+#menu-select li a{
+	color: antiquewhite;
+	text-decoration: none;
+	font-size: large;
+}
+
+#form-container {
+    margin-top: 240px;
+    margin-left: 90px;
+}
